@@ -9,8 +9,8 @@ def getRestaurantes(request):
     serializer = RestauranteSerializer(restaurantes, many=True)
     return Response(serializer.data)
 
-@api_view(['DELETE'])
-def excluirRestaurante(request, pk):
+@api_view(['GET'])
+def getRestaurante(request, pk):
     restaurante = Restaurante.objects.get(id=pk)
-    restaurante.delete()
-    return Response('Restaurante Excluido com sucesso')
+    serializer = RestauranteSerializer(restaurante, many=False)
+    return Response(serializer.data)
